@@ -13,7 +13,8 @@
   &autoplay=1. It carries nothing about anyone and it is the same for every notebook.
 
   Messages in:  { door: "call", id, fn, args }      -> player[fn].apply(player, args); reply { door: "reply", id, value }
-  Messages out: { door: "ready", duration }          once the player is ready
+  Messages out: { door: "hello" }                     as soon as this page runs
+                { door: "ready", duration }          once the player is ready
                 { door: "state", t, st, dur, rate, vol, muted }   every 100ms while ready (the parent's clock)
                 { door: "event", name, data }        onStateChange / onApiChange / onError
 -->
@@ -55,6 +56,7 @@
       }
     });
   };
+  send({ door: "hello" });   // the door has opened; the player follows once YouTube answers
   var s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(s);
 })();
 </script>
